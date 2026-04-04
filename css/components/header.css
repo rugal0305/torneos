@@ -43,6 +43,12 @@ header.scrolled {
   transition: transform var(--transition-base);
 }
 
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
 .logo:hover {
   transform: scale(1.05);
 }
