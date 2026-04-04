@@ -1,0 +1,86 @@
+/* ===================================
+   CURSOR LUMINOSO
+   Glow difuminado con delay en OKLCH
+   =================================== */
+
+.luminic-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    oklch(70% 0.25 259),
+    oklch(60% 0.20 259) 40%,
+    oklch(50% 0.15 259) 70%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  filter: blur(15px);
+  opacity: 0.7;
+  will-change: transform;
+}
+
+.luminic-cursor.active {
+  opacity: 0.9;
+}
+
+.luminic-cursor--trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    oklch(50% 0.22 259),
+    oklch(45% 0.18 259) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  filter: blur(12px);
+  opacity: 0.5;
+}
+
+/* Cursor clásico como fallback */
+@supports not (filter: blur(1px)) {
+  .luminic-cursor {
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary-500);
+    opacity: 1;
+  }
+  
+  .luminic-cursor--trail {
+    display: none;
+  }
+}
+
+/* Cursor normal visible con glow luminoso rodeándolo */
+body {
+  cursor: auto;
+}
+
+/* El glow luminoso rodea el cursor normal */
+button:hover,
+a:hover,
+[role="button"]:hover {
+  cursor: pointer;
+}
+
+/* Accesibilidad: mostrar cursor normal en móviles/tablets */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  
+  .luminic-cursor,
+  .luminic-cursor--trail {
+    display: none;
+  }
+}
