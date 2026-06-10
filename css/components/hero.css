@@ -1,6 +1,6 @@
 /* ===================================
    COMPONENTES - HERO SECTION
-   Sección hero con efecto parallax
+   Sección hero con efecto parallax y estética gaming oscura
    =================================== */
 
 .hero {
@@ -20,7 +20,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, var(--color-primary-050) 0%, var(--color-primary-100) 100%);
+  background: radial-gradient(circle at top, oklch(62% 0.26 35 / 0.1) 0%, var(--color-bg-main) 100%);
   z-index: -2;
 }
 
@@ -36,15 +36,15 @@
 }
 
 .hero-bg--layer-1 {
-  background: radial-gradient(ellipse at 20% 50%, oklch(65% 0.25 259 / 0.1) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 15% 40%, oklch(62% 0.26 35 / 0.12) 0%, transparent 60%);
 }
 
 .hero-bg--layer-2 {
-  background: radial-gradient(ellipse at 80% 80%, oklch(60% 0.20 259 / 0.08) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 85% 70%, oklch(68% 0.22 250 / 0.1) 0%, transparent 60%);
 }
 
 .hero-bg--layer-3 {
-  background: radial-gradient(ellipse at 50% 0%, oklch(70% 0.22 259 / 0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 10%, oklch(58% 0.24 310 / 0.06) 0%, transparent 50%);
 }
 
 /* Contenido del hero */
@@ -52,15 +52,15 @@
   position: relative;
   z-index: 10;
   text-align: center;
-  max-width: 800px;
+  max-width: 850px;
   padding: var(--space-xl);
-  animation: fadeInUp 0.8s ease-out;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -69,23 +69,29 @@
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.1;
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-black);
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  line-height: 1.05;
   margin-bottom: var(--space-lg);
-  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800));
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--color-white) 40%, var(--color-primary-400), var(--color-primary-500));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 10px 40px oklch(62% 0.26 35 / 0.15);
 }
 
 .hero p {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
   line-height: 1.6;
-  color: var(--color-gray-900);
+  color: var(--color-gray-200);
   margin-bottom: var(--space-2xl);
-  max-width: 600px;
+  max-width: 650px;
   margin-left: auto;
   margin-right: auto;
+  font-weight: var(--font-weight-semibold);
 }
 
 .hero .btn-group {
@@ -95,9 +101,9 @@
 /* Elemento decorativo con parallax */
 .hero-decoration {
   position: absolute;
-  opacity: 0.1;
+  opacity: 0.05;
   font-size: 200px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-black);
   z-index: 0;
   will-change: transform;
 }
@@ -111,7 +117,7 @@
 .hero-decoration--bottom {
   bottom: -100px;
   right: -50px;
-  color: var(--color-primary-600);
+  color: var(--color-accent-blue);
 }
 
 /* Scroll hint animado */
@@ -134,11 +140,12 @@
 }
 
 .scroll-hint svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--color-primary-600);
-  stroke-width: 2;
+  width: 28px;
+  height: 28px;
+  stroke: var(--color-primary-500);
+  stroke-width: 2.5;
   fill: none;
+  filter: drop-shadow(0 0 5px var(--color-primary-500));
 }
 
 /* Responsive */
@@ -153,15 +160,15 @@
   }
   
   .hero-decoration--top {
-    font-size: 150px;
+    font-size: 130px;
     top: -80px;
-    left: -150px;
+    left: -100px;
   }
   
   .hero-decoration--bottom {
-    font-size: 150px;
+    font-size: 130px;
     bottom: -80px;
-    right: -100px;
+    right: -70px;
   }
 }
 

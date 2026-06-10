@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar header
   const header = new Header();
 
+  // Inicializar formulario de registro
+  const registrationForm = new RegistrationForm();
+
   // Log de inicialización (solo en desarrollo)
   if (typeof console !== 'undefined' && console.log) {
     console.log('🎮 Torneos Free Fire - Aplicación Iniciada');

@@ -1,6 +1,6 @@
 /* ===================================
    COMPONENTES - HEADER/NAVEGACIÓN
-   Encabezado y navegación principal
+   Encabezado y navegación principal estilo dark glassmorphic
    =================================== */
 
 header {
@@ -9,15 +9,18 @@ header {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
+  background: rgba(10, 11, 14, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   transition: all var(--transition-base);
 }
 
 header.scrolled {
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+  background: rgba(10, 11, 14, 0.95);
+  border-bottom-color: oklch(62% 0.26 35 / 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .header-container {
@@ -30,9 +33,10 @@ header.scrolled {
 }
 
 .logo {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-extrabold);
-  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+  font-weight: var(--font-weight-black);
+  background: linear-gradient(135deg, var(--color-white) 40%, var(--color-primary-500));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -41,19 +45,19 @@ header.scrolled {
   align-items: center;
   gap: var(--space-sm);
   transition: transform var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
 }
-
 
 .logo img {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
 }
+
 .logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
-
-
 
 /* Navegación */
 nav {
@@ -63,11 +67,13 @@ nav {
 }
 
 nav a {
-  color: var(--color-gray-900);
+  color: var(--color-gray-200);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-base);
   position: relative;
   transition: color var(--transition-base);
+  text-decoration: none;
+  letter-spacing: 0.01em;
 }
 
 nav a::after {
@@ -77,12 +83,13 @@ nav a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--color-primary-500), var(--color-primary-600));
+  background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-blue));
+  box-shadow: 0 0 8px var(--color-accent-blue);
   transition: width var(--transition-base);
 }
 
 nav a:hover {
-  color: var(--color-primary-600);
+  color: var(--color-white);
 }
 
 nav a:hover::after {
@@ -109,13 +116,13 @@ nav a:focus-visible {
   display: block;
   width: 25px;
   height: 3px;
-  background: var(--color-primary-600);
+  background: var(--color-white);
   border-radius: var(--radius-full);
   transition: all var(--transition-base);
 }
 
 .menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
+  transform: rotate(45deg) translate(5px, 6px);
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -123,7 +130,7 @@ nav a:focus-visible {
 }
 
 .menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(8px, -8px);
+  transform: rotate(-45deg) translate(6px, -7px);
 }
 
 /* Responsive */
@@ -142,13 +149,14 @@ nav a:focus-visible {
     left: 0;
     right: 0;
     flex-direction: column;
-    background: var(--color-white);
+    background: rgba(19, 21, 26, 0.98);
     padding: var(--space-lg);
     gap: var(--space-md);
     max-height: 0;
     overflow: hidden;
     transition: max-height var(--transition-base);
-    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
   
   nav.active {
@@ -157,6 +165,7 @@ nav a:focus-visible {
   
   nav a {
     font-size: var(--font-size-lg);
+    padding: var(--space-xs) 0;
   }
   
   .logo {
@@ -167,6 +176,9 @@ nav a:focus-visible {
 /* Soporte para navegadores antiguos */
 @supports not (backdrop-filter: blur(1px)) {
   header {
-    background: rgba(255, 255, 255, 1);
+    background: rgb(10, 11, 14);
+  }
+  nav {
+    background: rgb(19, 21, 26);
   }
 }

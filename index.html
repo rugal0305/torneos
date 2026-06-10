@@ -29,8 +29,9 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
   
-  <!-- Prefetch para recursos -->
-  <link rel="prefetch" href="https://fonts.googleapis.com">
+  <!-- Preconnect para Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
   <!-- Canonical -->
   <link rel="canonical" href="https://torneos-freefire.com">
@@ -85,7 +86,7 @@
         </p>
         
         <div class="btn-group">
-          <a href="https://wa.me/529842140293?text=Hola,%20me%20interesa%20participar%20en%20los%20torneos%20de%20Free%20Fire" class="btn btn--primary btn--lg" role="button" target="_blank">
+          <a href="#registro-torneo" class="btn btn--primary btn--lg btn--glow" role="button">
             Inscribirse Ahora
           </a>
           <a href="https://wa.me/573207824209?text=Hola,%20me%20interesa%20participar%20en%20los%20torneos%20de%20Free%20Fire" 
@@ -240,6 +241,195 @@
             </li>
           </div>
         </article>
+
+        <!-- FORMULARIO DE REGISTRO MULTIPASO INTERACTIVO -->
+        <div class="registration-form-container mt-4xl" id="registro-torneo">
+          <div class="form-header text-center mb-2xl">
+            <span class="badge badge--accent mb-sm">INSCRIPCIÓN ABIERTA</span>
+            <h3>🏆 Registro de Escuadra</h3>
+            <p class="text-sm text-secondary">Completa el formulario en 3 pasos rápidos. Al finalizar, se abrirá WhatsApp con tus datos pre-llenados.</p>
+          </div>
+
+          <!-- Indicador de progreso -->
+          <div class="step-progress">
+            <div class="progress-bar">
+              <div class="progress-bar-fill" id="form-progress-bar"></div>
+            </div>
+            <div class="steps-indicators">
+              <div class="step-dot active" data-step="1">
+                <span class="step-dot-num">1</span>
+                <span class="step-dot-label">Equipo</span>
+              </div>
+              <div class="step-dot" data-step="2">
+                <span class="step-dot-num">2</span>
+                <span class="step-dot-label">Método</span>
+              </div>
+              <div class="step-dot" data-step="3">
+                <span class="step-dot-num">3</span>
+                <span class="step-dot-label">Confirmar</span>
+              </div>
+            </div>
+          </div>
+
+          <form id="tournament-registration-form" class="mt-2xl" novalidate>
+            <!-- PASO 1: DATOS DEL EQUIPO -->
+            <div class="form-step active" data-step="1">
+              <div class="form-step-title mb-lg">
+                <h4>👥 Nombre de Dúo e IDs del Juego</h4>
+                <p class="text-sm text-secondary">Escribe los apodos tal como aparecen en el perfil de Free Fire.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="team-name">Nombre de tu Dúo / Equipo <span class="required">*</span></label>
+                <input type="text" id="team-name" name="teamName" placeholder="Ej: Los Insanos Rugal" required autocomplete="off">
+                <span class="error-text">Ingresa el nombre del equipo.</span>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="player1-nick">ID / Nick Jugador 1 (Líder) <span class="required">*</span></label>
+                  <input type="text" id="player1-nick" name="player1Nick" placeholder="Ej: Rugal_0305" required autocomplete="off">
+                  <span class="error-text">Ingresa el ID del Jugador 1.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="player1-whatsapp">Número de WhatsApp <span class="required">*</span></label>
+                  <input type="tel" id="player1-whatsapp" name="player1Whatsapp" placeholder="Ej: 3207824209" required autocomplete="off">
+                  <span class="error-text">Ingresa un WhatsApp de contacto.</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="player2-nick">ID / Nick Jugador 2 <span class="required">*</span></label>
+                <input type="text" id="player2-nick" name="player2Nick" placeholder="Ej: Jeysi_0910" required autocomplete="off">
+                <span class="error-text">Ingresa el ID del Jugador 2.</span>
+              </div>
+
+              <div class="form-actions mt-xl">
+                <button type="button" class="btn btn--primary next-step-btn btn--glow">
+                  Siguiente Paso <span class="btn-arrow">➔</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- PASO 2: PAÍS Y PAGO -->
+            <div class="form-step" data-step="2">
+              <div class="form-step-title mb-lg">
+                <h4>🌎 País y Detalles de Transferencia</h4>
+                <p class="text-sm text-secondary">Selecciona tu país para visualizar el valor exacto y copiar las cuentas autorizadas.</p>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="player-country">Selecciona tu País <span class="required">*</span></label>
+                  <select id="player-country" name="playerCountry" required>
+                    <option value="" disabled selected>Elige un país...</option>
+                    <option value="colombia">Colombia 🇨🇴</option>
+                    <option value="mexico">México 🇲🇽</option>
+                  </select>
+                  <span class="error-text">Selecciona tu país de procedencia.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="tournament-select">Modalidad del Torneo <span class="required">*</span></label>
+                  <select id="tournament-select" name="tournamentSelect" required>
+                    <option value="" disabled selected>Elige un torneo...</option>
+                    <option value="duo_diario">🏆 Torneo Diario Dúo ($4,000 COP / $20 MXN por Kill)</option>
+                    <option value="duo_semanal">🔥 Torneo Especial Fin de Semana</option>
+                  </select>
+                  <span class="error-text">Selecciona la modalidad.</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="payment-method">Método de Pago <span class="required">*</span></label>
+                <select id="payment-method" name="paymentMethod" required disabled>
+                  <option value="" disabled selected>Selecciona tu país primero...</option>
+                </select>
+                <span class="error-text">Selecciona un método de pago.</span>
+              </div>
+
+              <!-- Caja de Pago Dinámica -->
+              <div class="dynamic-payment-card hidden" id="payment-details-card">
+                <div class="payment-card-header">
+                  <span class="payment-badge-status">CUENTA VERIFICADA</span>
+                  <div class="payment-price-display">
+                    <span class="price-label">Total a Transferir:</span>
+                    <span class="price-value" id="payment-price-value">$0</span>
+                  </div>
+                </div>
+                <div class="payment-card-body">
+                  <p class="payment-instruct-text">Transfiere el monto completo y copia los datos abajo para realizar la transacción:</p>
+                  
+                  <div class="copy-input-group mt-md">
+                    <div class="copy-input-container">
+                      <span class="copy-input-label" id="copy-number-label">Número de cuenta</span>
+                      <span class="copy-input-value" id="copy-number-value">0000000000</span>
+                    </div>
+                    <button type="button" class="btn-copy-action" id="btn-copy-account" aria-label="Copiar número de cuenta">
+                      <span class="copy-icon">📋</span>
+                      <span class="copy-status-txt">Copiar</span>
+                    </button>
+                  </div>
+
+                  <div class="payment-meta-details mt-md">
+                    <p>👤 <span class="meta-label">Titular:</span> <span id="payment-owner-name">Nombre</span></p>
+                    <p id="payment-extra-detail-row" class="hidden">💡 <span class="meta-label">Detalle:</span> <span id="payment-extra-detail-val">-</span></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions mt-xl">
+                <button type="button" class="btn btn--secondary prev-step-btn">
+                  <span class="btn-arrow">⬅</span> Atrás
+                </button>
+                <button type="button" class="btn btn--primary next-step-btn" id="btn-next-step-2" disabled>
+                  Siguiente Paso <span class="btn-arrow">➔</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- PASO 3: CONFIRMACIÓN Y WHATSAPP -->
+            <div class="form-step" data-step="3">
+              <div class="form-step-title mb-lg">
+                <h4>🔥 Último Paso: Validación</h4>
+                <p class="text-sm text-secondary">Registra la referencia del pago para asociarla a tus jugadores.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="payment-ref">ID de Transacción / Nombre del Titular <span class="required">*</span></label>
+                <input type="text" id="payment-ref" name="paymentRef" placeholder="Ej: Ref 984120 o Transferencia de Juan" required autocomplete="off">
+                <span class="error-text">Ingresa el ID de pago o el nombre del titular para verificar.</span>
+              </div>
+
+              <!-- Tarjeta de advertencias y checklist -->
+              <div class="form-warning-checklist mt-lg">
+                <h5>⚠️ CONFIRMACIONES FINALES</h5>
+                <div class="checklist-group mt-md">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="chk-screenshot-ready" required>
+                    <span class="checkmark-box"></span>
+                    <span class="checkbox-text">Ya tengo la captura de pantalla del pago lista para enviarla al chat de WhatsApp.</span>
+                  </label>
+                  <label class="checkbox-container mt-sm">
+                    <input type="checkbox" id="chk-no-hacks" required>
+                    <span class="checkmark-box"></span>
+                    <span class="checkbox-text">Acepto las reglas oficiales: Cero tolerancia a hacks, macros o comportamiento tóxico.</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-actions mt-xl">
+                <button type="button" class="btn btn--secondary prev-step-btn">
+                  <span class="btn-arrow">⬅</span> Atrás
+                </button>
+                <button type="submit" class="btn btn--whatsapp btn--glow" id="btn-submit-form">
+                  💬 Registrarse y Enviar por WhatsApp
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -307,7 +497,7 @@
         </div>
 
         <div class="btn-group">
-          <a href="https://chat.whatsapp.com/DO510EeSR7RLXhU2xfGTy2" class="btn btn--primary btn--lg btn--block" role="button"   target="_blank">
+          <a href="#registro-torneo" class="btn btn--primary btn--lg btn--block btn--glow" role="button">
             Inscribirse en Torneo
           </a>
         </div>
@@ -349,6 +539,7 @@
   <script src="js/modules/luminic-cursor.js"></script>
   <script src="js/modules/parallax.js"></script>
   <script src="js/modules/header.js"></script>
+  <script src="js/modules/registration-form.js"></script>
   
   <!-- SCRIPT PRINCIPAL -->
   <script src="js/script.js"></script>

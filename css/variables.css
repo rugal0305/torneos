@@ -1,29 +1,48 @@
 /* ===================================
-   SISTEMA DE COLORES - OKLCH
-   Paleta monócroma azul
+   SISTEMA DE COLORES Y DISEÑO - GAMING PREMIUM
+   Tema oscuro con acentos de neon (OKLCH)
    =================================== */
 
-:root {
-  /* Azules monocromáticos en OKLCH */
-  --color-primary-050: oklch(97% 0.04 258);      /* Azul muy claro */
-  --color-primary-100: oklch(94% 0.08 258);      /* Azul claro */
-  --color-primary-200: oklch(88% 0.12 258);      /* Azul suave */
-  --color-primary-300: oklch(80% 0.16 258);      /* Azul medio claro */
-  --color-primary-400: oklch(70% 0.22 259);      /* Azul medio */
-  --color-primary-500: oklch(60% 0.28 259);      /* Azul principal */
-  --color-primary-600: oklch(50% 0.32 259);      /* Azul oscuro */
-  --color-primary-700: oklch(42% 0.30 259);      /* Azul más oscuro */
-  --color-primary-800: oklch(35% 0.28 260);      /* Azul muy oscuro */
-  --color-primary-900: oklch(25% 0.22 260);      /* Azul casi negro */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap');
 
-  /* Neutrales */
+:root {
+  /* Fondo y superficie oscuros */
+  --color-bg-main: oklch(12% 0.015 255);       /* #0a0b0e - Fondo ultra oscuro */
+  --color-bg-surface: oklch(17% 0.02 255);     /* #13151a - Superficie base */
+  --color-bg-card: oklch(18% 0.02 255 / 0.65);  /* Vidrio esmerilado translúcido */
+  --color-bg-card-hover: oklch(22% 0.03 255 / 0.85);
+
+  /* Acentos de Neon (Gaming) */
+  --color-primary-050: oklch(96% 0.02 35);
+  --color-primary-100: oklch(90% 0.06 35);
+  --color-primary-200: oklch(80% 0.12 35);
+  --color-primary-300: oklch(72% 0.18 35);
+  --color-primary-400: oklch(66% 0.22 35);
+  --color-primary-500: oklch(62% 0.26 35);      /* Naranja Fuego Principal */
+  --color-primary-600: oklch(55% 0.28 32);      /* Naranja Fuego Oscuro */
+  --color-primary-700: oklch(47% 0.27 30);
+  --color-primary-800: oklch(35% 0.24 28);
+  --color-primary-900: oklch(22% 0.18 25);      /* Tono rojizo muy oscuro */
+
+  /* Colores de Acento Adicionales */
+  --color-accent-blue: oklch(68% 0.22 250);     /* Azul Zona */
+  --color-accent-blue-dark: oklch(50% 0.24 250);
+  --color-accent-gold: oklch(82% 0.22 75);      /* Oro de Victoria */
+  --color-accent-purple: oklch(58% 0.24 310);   /* Morado Neon Cyber */
+
+  /* Neutrales de Texto */
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-gray-50: #fafafa;
-  --color-gray-100: #f5f5f5;
-  --color-gray-200: #eeeeee;
-  --color-gray-300: #e0e0e0;
-  --color-gray-900: #212121;
+  --color-gray-50: oklch(98% 0.005 255);
+  --color-gray-100: oklch(94% 0.01 255);
+  --color-gray-200: oklch(88% 0.01 255);        /* Texto secundario claro */
+  --color-gray-300: oklch(75% 0.01 255);        /* Texto mutado */
+  --color-gray-900: oklch(14% 0.01 255);
+
+  /* Bordes de Neon */
+  --color-border: oklch(30% 0.03 255 / 0.4);
+  --color-border-glow: oklch(62% 0.26 35 / 0.25);
+  --color-border-blue-glow: oklch(68% 0.22 250 / 0.25);
 
   /* Espaciado */
   --space-xs: 0.25rem;
@@ -35,10 +54,9 @@
   --space-3xl: 4rem;
   --space-4xl: 6rem;
 
-  /* Tipografía */
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  --font-family-display: Georgia, 'Times New Roman', serif;
+  /* Tipografía Gaming */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -56,32 +74,34 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
+  --font-weight-black: 900;
 
   /* Transiciones */
-  --transition-fast: 150ms ease-in-out;
-  --transition-base: 250ms ease-in-out;
-  --transition-slow: 350ms ease-in-out;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Sombras */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  /* Sombras y Resplandores */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.7);
+  --shadow-glow-orange: 0 0 20px oklch(62% 0.26 35 / 0.35);
+  --shadow-glow-blue: 0 0 20px oklch(68% 0.22 250 / 0.35);
 
   /* Bordes redondeados */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
   --radius-full: 9999px;
 }
 
-/* Modo oscuro (opcional para futuros usos) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: var(--color-primary-900);
-    --color-text: var(--color-white);
-  }
+/* Forzar modo oscuro por defecto en todo el sitio */
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-gray-100);
+  font-family: var(--font-family-base);
+  -webkit-font-smoothing: antialiased;
 }
+
