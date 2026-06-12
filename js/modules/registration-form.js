@@ -370,16 +370,6 @@ class RegistrationForm {
     });
 
     // Validaciones específicas
-    if (stepNum === 1) {
-      const waInput = document.getElementById('player1-whatsapp');
-      if (waInput && waInput.value.trim()) {
-        const cleaned = waInput.value.replace(/\D/g, '');
-        if (cleaned.length < 7) {
-          this.showInputError(waInput, 'El número de WhatsApp debe tener mínimo 7 dígitos.');
-          isValid = false;
-        }
-      }
-    }
 
     return isValid;
   }
@@ -414,7 +404,6 @@ class RegistrationForm {
     // Recopilar valores
     const teamName = document.getElementById('team-name').value.trim();
     const p1Nick = document.getElementById('player1-nick').value.trim();
-    const p1Whatsapp = document.getElementById('player1-whatsapp').value.trim();
     const p2Nick = document.getElementById('player2-nick').value.trim();
     const country = this.countrySelect.value;
     const countryLabel = this.countrySelect.options[this.countrySelect.selectedIndex].text;
@@ -434,7 +423,6 @@ class RegistrationForm {
 ----------------------------------
 🏆 *Equipo:* ${teamName}
 👤 *Jugador 1 (Líder):* ${p1Nick}
-📱 *WhatsApp:* ${p1Whatsapp}
 👤 *Jugador 2:* ${p2Nick}
 
 🌎 *País:* ${countryLabel}
