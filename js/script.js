@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar formulario de registro
   const registrationForm = new RegistrationForm();
 
+  // Inicializar calculadora de ganancias
+  const earningsCalculator = new EarningsCalculator();
+
+  // Inicializar acordeón FAQ
+  const faqAccordion = new FaqAccordion();
+
+  // Inicializar efectos al scroll (reveal)
+  const scrollReveal = new ScrollReveal();
+
   // Log de inicialización (solo en desarrollo)
   if (typeof console !== 'undefined' && console.log) {
     console.log('🎮 Torneos Free Fire - Aplicación Iniciada');
