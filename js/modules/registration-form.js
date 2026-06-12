@@ -33,6 +33,9 @@ class RegistrationForm {
     this.btnCopyAccount = document.getElementById('btn-copy-account');
     this.btnNextStep2 = document.getElementById('btn-next-step-2');
     
+    // Quick copy buttons in pricing/account tables
+    this.quickCopyButtons = Array.from(document.querySelectorAll('[data-copy-target]'));
+    
     // Estado del formulario
     this.currentStep = 1;
     this.totalSteps = this.steps.length;
@@ -128,6 +131,18 @@ class RegistrationForm {
       this.btnCopyAccount.addEventListener('click', () => this.copyAccountToClipboard());
     }
 
+    // Botones de copia rápida en la tabla de precios
+    this.quickCopyButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-copy-target');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          const valToCopy = targetEl.textContent.trim();
+          this.copyTextToClipboard(valToCopy, btn);
+        }
+      });
+    });
+
     // Envío del Formulario
     this.form.addEventListener('submit', (e) => this.handleSubmit(e));
 
@@ -147,16 +162,19 @@ class RegistrationForm {
     const nextStepEl = this.form.querySelector(`.form-step[data-step="${stepNum}"]`);
 
     currentStepEl.classList.remove('active');
+    currentStepEl.classList.add('hidden');
     
-    // Pequeño timeout para permitir animación CSS
-    setTimeout(() => {
-      nextStepEl.classList.add('active');
-      this.currentStep = stepNum;
-      this.updateProgressBar();
-      
-      // Auto-scroll al formulario
-      document.getElementById('registro-torneo').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 150);
+    nextStepEl.classList.remove('hidden');
+    nextStepEl.classList.add('active');
+    
+    this.currentStep = stepNum;
+    this.updateProgressBar();
+    
+    // Auto-scroll al formulario
+    const scrollTarget = document.getElementById('registro-torneo');
+    if (scrollTarget) {
+      scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // Actualiza los puntitos y la barra de progreso
@@ -271,21 +289,24 @@ class RegistrationForm {
     setTimeout(() => this.paymentCard.classList.remove('animate-fadeIn'), 500);
   }
 
-  // Función para copiar la cuenta
-  copyAccountToClipboard() {
-    const valToCopy = this.copyNumberValEl.textContent;
-    
-    // Método moderno
+  // Helper general para copiar al portapapeles con feedback
+  copyTextToClipboard(text, btn) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(valToCopy)
-        .then(() => this.showCopyFeedback())
-        .catch(err => this.fallbackCopyText(valToCopy));
+      navigator.clipboard.writeText(text)
+        .then(() => this.showCopyFeedback(btn))
+        .catch(err => this.fallbackCopyText(text, btn));
     } else {
-      this.fallbackCopyText(valToCopy);
+      this.fallbackCopyText(text, btn);
     }
   }
 
-  fallbackCopyText(text) {
+  // Función para copiar la cuenta del formulario
+  copyAccountToClipboard() {
+    const valToCopy = this.copyNumberValEl.textContent;
+    this.copyTextToClipboard(valToCopy, this.btnCopyAccount);
+  }
+
+  fallbackCopyText(text, btn) {
     const textArea = document.createElement('textarea');
     textArea.value = text;
     textArea.style.position = 'fixed'; // Evitar scroll
@@ -294,17 +315,17 @@ class RegistrationForm {
     textArea.select();
     try {
       document.execCommand('copy');
-      this.showCopyFeedback();
+      this.showCopyFeedback(btn);
     } catch (err) {
       console.error('Error al copiar texto: ', err);
     }
     document.body.removeChild(textArea);
   }
 
-  showCopyFeedback() {
-    const originalText = this.btnCopyAccount.innerHTML;
-    this.btnCopyAccount.classList.add('copied');
-    this.btnCopyAccount.innerHTML = '<span class="copy-icon">✓</span> <span class="copy-status-txt">¡Copiado!</span>';
+  showCopyFeedback(btn) {
+    const originalText = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<span class="material-symbols-outlined text-lg text-secondary-container">check</span>';
     
     // Efecto de cursor luminoso al copiar
     if (typeof LuminicCursor !== 'undefined') {
@@ -316,8 +337,8 @@ class RegistrationForm {
     }
 
     setTimeout(() => {
-      this.btnCopyAccount.classList.remove('copied');
-      this.btnCopyAccount.innerHTML = originalText;
+      btn.classList.remove('copied');
+      btn.innerHTML = originalText;
     }, 2000);
   }
 

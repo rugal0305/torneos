@@ -7,12 +7,13 @@
 
 class Header {
   constructor() {
-    this.header = document.querySelector('header');
-    this.menuToggle = document.querySelector('.menu-toggle');
-    this.nav = document.querySelector('nav');
-    this.navLinks = document.querySelectorAll('nav a');
+    this.navBar = document.querySelector('nav'); // The sticky navbar
+    this.menuToggle = document.getElementById('menu-toggle-btn');
+    this.menuIcon = document.getElementById('menu-icon');
+    this.mobileMenu = document.getElementById('mobile-menu');
+    this.navLinks = document.querySelectorAll('.mobile-nav-link');
     
-    if (this.header && this.menuToggle && this.nav) {
+    if (this.menuToggle && this.mobileMenu) {
       this.init();
     }
   }
@@ -30,25 +31,44 @@ class Header {
       link.addEventListener('click', () => this.closeMenu());
     });
 
-    // Efecto de scroll en header
-    window.addEventListener('scroll', () => this.handleScroll());
+    // Efecto de scroll en navbar
+    if (this.navBar) {
+      window.addEventListener('scroll', () => this.handleScroll());
+    }
   }
 
   toggleMenu() {
-    this.menuToggle.classList.toggle('active');
-    this.nav.classList.toggle('active');
+    const isHidden = this.mobileMenu.classList.contains('hidden');
+    if (isHidden) {
+      this.openMenu();
+    } else {
+      this.closeMenu();
+    }
+  }
+
+  openMenu() {
+    this.mobileMenu.classList.remove('hidden');
+    this.menuToggle.setAttribute('aria-expanded', 'true');
+    if (this.menuIcon) {
+      this.menuIcon.textContent = 'close';
+    }
   }
 
   closeMenu() {
-    this.menuToggle.classList.remove('active');
-    this.nav.classList.remove('active');
+    this.mobileMenu.classList.add('hidden');
+    this.menuToggle.setAttribute('aria-expanded', 'false');
+    if (this.menuIcon) {
+      this.menuIcon.textContent = 'menu';
+    }
   }
 
   handleScroll() {
-    if (window.scrollY > 50) {
-      this.header.classList.add('scrolled');
+    if (window.scrollY > 20) {
+      this.navBar.classList.add('shadow-lg', 'bg-background/95');
+      this.navBar.classList.remove('bg-background/90');
     } else {
-      this.header.classList.remove('scrolled');
+      this.navBar.classList.remove('shadow-lg', 'bg-background/95');
+      this.navBar.classList.add('bg-background/90');
     }
   }
 }
